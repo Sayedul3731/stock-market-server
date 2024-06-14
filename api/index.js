@@ -5,13 +5,7 @@ const { PrismaClient } = require("@prisma/client");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+const prisma = new PrismaClient();
 
 const app = express();
 const port = process.env.PORT || 3001;
