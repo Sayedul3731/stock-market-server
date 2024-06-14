@@ -39,6 +39,23 @@ app.post("/stocks", async (req, res) => {
   });
   res.json(newStockData);
 });
+app.delete("/stocks/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(`Delete request received for id: ${id}`);
+  try {
+    const result = await prisma.stock.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Stock not found or other error",
+    });
+  }
+});
 app.listen(3001, () => {
   console.log("Server is running on 3001");
 });
