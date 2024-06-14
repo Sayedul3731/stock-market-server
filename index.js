@@ -56,6 +56,33 @@ app.delete("/stocks/:id", async (req, res) => {
     });
   }
 });
+app.put("/stocks/:id", async (req, res) => {
+  const id = req.params.id;
+  const { date, trade_code, high, low, open, close, volume } = req.body;
+  console.log(`update request received for id: ${id}`);
+  try {
+    const result = await prisma.stock.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        date,
+        trade_code,
+        high,
+        low,
+        open,
+        close,
+        volume,
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Stock not found or other error",
+    });
+  }
+});
 app.listen(3001, () => {
   console.log("Server is running on 3001");
 });
