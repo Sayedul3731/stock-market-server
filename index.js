@@ -20,6 +20,25 @@ app.post("/users", async (req, res) => {
   });
   res.json(newUser);
 });
+app.get("/stocks", async (req, res) => {
+  const stockData = await prisma.stock.findMany();
+  res.json(stockData);
+});
+app.post("/stocks", async (req, res) => {
+  const { date, trade_code, high, low, open, close, volume } = req.body;
+  const newStockData = await prisma.stock.create({
+    data: {
+      date,
+      trade_code,
+      high,
+      low,
+      open,
+      close,
+      volume,
+    },
+  });
+  res.json(newStockData);
+});
 app.listen(3001, () => {
   console.log("Server is running on 3001");
 });
