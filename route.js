@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 let users = [
   { id: 1, name: "John Doe", email: "john.doe@example.com" },
@@ -7,10 +9,20 @@ let users = [
 ];
 
 // Get all users
-router.get("/", (req, res) => {
+router.get("/all", async (req, res) => {
+  const users = await prisma.user.findMany();
   res.json(users);
 });
-
+router.post("/users", async (req, res) => {
+  const { name, email } = req.body;
+  const newUser = await prisma.user.create({
+    data: {
+      name,
+      email,
+    },
+  });
+  res.json(newUser);
+});
 // Get a user by ID
 router.get("/:id", (req, res) => {
   const user = users.find((u) => u.id === parseInt(req.params.id));
