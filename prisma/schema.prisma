@@ -17,3 +17,13 @@ model User {
   name String @db.VarChar(30)
   email String @db.VarChar(40)
 }
+model stock {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  trade_code String @db.VarChar(20)
+high Float 
+low Float
+open Float
+close Float
+volume Int
+}
