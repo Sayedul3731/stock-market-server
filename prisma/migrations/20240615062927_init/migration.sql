@@ -11,8 +11,8 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Stock` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `trade_code` VARCHAR(200) NOT NULL,
+    `date` DATETIME(3) NOT NULL,
+    `trade_code` VARCHAR(191) NOT NULL,
     `high` DOUBLE NOT NULL,
     `low` DOUBLE NOT NULL,
     `open` DOUBLE NOT NULL,
