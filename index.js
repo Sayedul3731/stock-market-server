@@ -12,7 +12,7 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.get("/", async (req, res) => {
+app.get("/test", async (req, res) => {
   res.json({ res: "working" });
 });
 app.get("/users", async (req, res) => {
