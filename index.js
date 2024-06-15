@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+const cors = require("cors");
+app.use(cors());
 app.use(express.json()); // for parsing application/json
 
 // Import routes
@@ -13,6 +15,7 @@ app.use("/", userRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.post("/stocks", userRoutes);
 // app.get("/users", async (req, res) => {
 //   try {
 //     const users = await prisma.user.findMany();
